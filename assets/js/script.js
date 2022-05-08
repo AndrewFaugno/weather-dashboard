@@ -1,4 +1,17 @@
-var cityName = "Greenwich"
+
+// get city input
+var getCity = function() {
+    // get text value
+    var cityName = $("#city-name").val();
+    $("#city-name").val("");
+    // check to see if input box is empty, if not send to geoCode()
+    if (cityName) { 
+        geoCode(cityName);
+    } else {
+        alert("Please Enter City Name");
+        return;
+    }
+}
 
 // convert city name to lon and lat
 var geoCode = function(cityName) {
@@ -10,14 +23,15 @@ var geoCode = function(cityName) {
             response.json().then(function(data) {
                 var latitude = data[0].lat;
                 var longitude = data[0].lon;
-                
+                window.officialName = data[0].name
+                console.log(data)
                 // send vars to getData
                 getData(latitude,longitude)
             });
         }
         // error with request
         else {
-            console.log("There was a problem with your request!");
+            alert("There was a problem with your request!");
         }
     });
 }
@@ -42,10 +56,9 @@ var getData = function(latitude,longitude) {
 
 
 var forecast = function(data) {
-    console.log(data);
     // input current weather data into container
     var currentDate = moment().format('MM/DD/YYYY');
-    $("#location-header").text(cityName + ' (' + currentDate + ')')
+    $("#location-header").text(window.officialName + ' (' + currentDate + ')')
     $("#temp").text(data.current.temp + "\u00B0F")
     $("#wind").text(data.current.wind_speed + " MPH")
     $("#humidity").text(data.current.humidity + "%")
@@ -68,6 +81,9 @@ var forecast = function(data) {
     $("#uv").addClass(uvStatus);
 
 
+    // remove any child nodes if any to prevent clutter
+    var weeklyEl = $("#weekly");
+    console.log(weeklyEl.firstElementChild)
     // create card for weather forecast and loop to next day
     var nDays = 1
     for (var i = 0; i < 5; i++) {
@@ -92,8 +108,8 @@ var forecast = function(data) {
         .text("Humidity: " + data.daily[i].humidity + "%");
         
         
-        $("#weekly").append(forecastCard);
-        $(forecastCard).append(forecastDate, forecastTemp, forecastWind, forecastHum);
+        weeklyEl.append(forecastCard);
+        forecastCard.append(forecastDate, forecastTemp, forecastWind, forecastHum);
         
         nDays = nDays + 1;
     };
@@ -101,4 +117,7 @@ var forecast = function(data) {
 
 };
 
-geoCode(cityName);
+// event listener for input
+$("button").on('click', getCity)
+
+
