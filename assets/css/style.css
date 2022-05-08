@@ -1,0 +1,15 @@
+.low {
+    background-color: lightgreen;
+}
+.moderate {
+    background-color: yellow;
+}
+.high {
+    background-color: orange;
+}
+.ver-high {
+    background-color: red;
+}
+.extreme {
+    background-color: violet;
+}

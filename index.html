@@ -23,29 +23,30 @@
                 <button class="btn btn-primary w-100 mb-3 p-2" id="search">Search</button>
             </div>
             <div class="w-100 bg-secondary card text-center p-2" id="history">Myrtle Beach</div>
-
         </div>
+
+        <!-- Current City Weather Box -->
         <div class="col-9">
             <div class="p-2 border border-dark mb-3" id="today">
-                <h2 id="location-header">Myrtle Beach (8/25/2022)</h2>
-                <p>temp</p>
-                <p>wind</p>
-                <p>humidity</p>
-                <p>uv index (green background)</p>
+                <h2 id="location-header">Enter City Name</h2>
+                <p>Temp: <span id="temp"></span></p>
+                <p>Wind: <span id="wind"></span></p>
+                <p>Humidity: <span id="humidity"></span></p>
+                <p>UV Index: <span class="p-1 pl-4 pr-4" id="uv"></span></p>
             </div>
+
+            <!-- 5 day forecast cards -->
             <div class="">
                 <div class="font-weight-bold mb-2">5-Day Forecast:</div>
-                <div class="row justify-content-between">
-                    <div class="bg-secondary text-light col-2" id="forecast">3/30/33</div>
-                    <div class="bg-secondary text-light col-2" id="forecast">3/30/33</div>
-                    <div class="bg-secondary text-light col-2" id="forecast">3/30/33</div>
-                    <div class="bg-secondary text-light col-2" id="forecast">3/30/33</div>
-                    <div class="bg-secondary text-light col-2" id="forecast">3/30/33</div>
+                <div class="row justify-content-between" id="weekly">
+                    <!-- forecast cards created here -->
                 </div>
                 
             </div>
         </div>
     </div>
+    
+    <script src="https://momentjs.com/downloads/moment.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
