@@ -11,7 +11,7 @@ User can input city name and recieve the current weather conditions and weather 
 * OPENWEATHERMAP API
 
 ## Website
-
+https://andrewfaugno.github.io/weather-dashboard/
 
 ## Deployed Application
 
