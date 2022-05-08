@@ -58,6 +58,7 @@ var forecast = function(data) {
     // input current weather data into container
     var currentDate = moment().format('MM/DD/YYYY');
     $("#location-header").text(window.officialName + ' (' + currentDate + ')')
+    $("#location-header").append("<img src='https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png'>")
     $("#temp").text(data.current.temp + "\u00B0F")
     $("#wind").text(data.current.wind_speed + " MPH")
     $("#humidity").text(data.current.humidity + "%")
@@ -84,16 +85,24 @@ var forecast = function(data) {
     $("#weekly").empty();
 
     var forecastEl = $("#weekly");
+
     // create card for weather forecast and loop to next day
     var nDays = 1
+    console.log(data)
     for (var i = 0; i < 5; i++) {
+        
+        // gets the png id for the weather icons
+        var icon = "https://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png"
+        
         // creates container with date as header
         var forecastCard = $("<div>")
         .addClass("bg-secondary text-light col-2 p-2");
 
+        // creates card header with date
         var forecastDate = $("<h5>")
         .addClass("mb-4")
         .text(moment().add(nDays, 'days').format('MM/DD/YYYY'));
+
         // creates and places data inside container
         var forecastTemp = $("<p>")
         .addClass("mt-2 text-wrap")
@@ -107,12 +116,13 @@ var forecast = function(data) {
         .addClass("mt-2 text-wrap")
         .text("Humidity: " + data.daily[i].humidity + "%");
         
-        
+        // adds weather img to card
+        forecastDate.append("<img src=" + icon + ">")
+
         forecastEl.append(forecastCard);
         forecastCard.append(forecastDate, forecastTemp, forecastWind, forecastHum);
         
         nDays = nDays + 1;
-
         saveHistory(window.officialName);
     };
 };
@@ -147,10 +157,6 @@ var displayHistory = function() {
     }
 }
 
-var test = function() {
-    console.log(this.value)
-}
-
 // event listener for input
 $("#search").on('click', function() {
     getCity();
@@ -162,7 +168,11 @@ $("#history").on('click', function(e) {
     geoCode(text);
 })
 
+$("#clear").on('click', function() {
+    $("#history").empty();
+    localStorage.clear();
+})
+
 displayHistory();
 
-console.log(localStorage.getItem("city0"))
 
