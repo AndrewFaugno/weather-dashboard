@@ -1,4 +1,3 @@
-
 // get city input
 var getCity = function() {
     // get text value
@@ -7,7 +6,6 @@ var getCity = function() {
     // check to see if input box is empty, if not send to geoCode()
     if (cityName) { 
         geoCode(cityName);
-        saveHistory(cityName);
     } else {
         alert("Please Enter City Name");
         return;
@@ -83,13 +81,7 @@ var forecast = function(data) {
 
 
     // remove any child nodes if any to prevent clutter
-    var weeklyEl = document.querySelector("#weekly");
-    function removeChildElements(weeklyEl) {
-        while (weeklyEl.firstChild) {
-            weeklyEl.removeChild(weeklyEl.firstChild);
-        }
-    }
-    removeChildElements(weeklyEl)
+    $("#weekly").empty();
 
     var forecastEl = $("#weekly");
     // create card for weather forecast and loop to next day
@@ -120,14 +112,57 @@ var forecast = function(data) {
         forecastCard.append(forecastDate, forecastTemp, forecastWind, forecastHum);
         
         nDays = nDays + 1;
+
+        saveHistory(window.officialName);
     };
 };
 
 var saveHistory = function(cityName) {
-    
+    // check if city is already in storage
+    var checkCity = false;
+    for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage["city" + i] === cityName) {
+            checkCity = true;
+            break;
+        }
+    }
+    if (checkCity === false) {
+        // saves city to storage
+        localStorage.setItem("city" + localStorage.length, cityName)
+        displayHistory();
+    }
+}
+
+var displayHistory = function() {
+    $("#history").empty();
+    var historyEl = $("#history");
+    for (var i = 0; i < localStorage.length; i++) {
+
+        var text = localStorage.getItem("city" + i)
+        var buttonHistory = $("<button>")
+            .addClass("btn text-center w-100 mb-3")
+            .attr("id", "history-btn")
+            .text(text);
+            historyEl.append(buttonHistory);
+    }
+}
+
+var test = function() {
+    console.log(this.value)
 }
 
 // event listener for input
-$("button").on('click', getCity)
+$("#search").on('click', function() {
+    getCity();
+});
 
+// event listener for history buttons
+$("#history").on('click', function(e) {
+    var text = $(e.target).text().trim();
+    geoCode(text);
+})
+
+displayHistory();
+
+console.log(localStorage.getItem("city0"))
 
