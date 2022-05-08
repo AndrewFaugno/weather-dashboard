@@ -3,7 +3,6 @@
 todo : 
 google font (maybe)
 
-delete child elements to prevent clutter
 
 add icons from open weather (possible d+n with momentjs)
 
