@@ -8,6 +8,7 @@ User can input city name and recieve the current weather conditions and weather 
 * JS
 * JQUERY
 * BOOTSTRAP
+* MOMENT JS
 * OPENWEATHERMAP API
 
 ## Website
