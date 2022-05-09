@@ -14,7 +14,7 @@ var getCity = function() {
 
 // convert city name to lon and lat
 var geoCode = function(cityName) {
-    var geoApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=38e977330d53ed7f34446b8799f27821"
+    var geoApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=38e977330d53ed7f34446b8799f27821"
     // fetch api data for given location to convert to long and lat
     fetch(geoApi).then(function(response) {
         // request went through
