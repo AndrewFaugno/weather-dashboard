@@ -23,7 +23,6 @@ var geoCode = function(cityName) {
                 var latitude = data[0].lat;
                 var longitude = data[0].lon;
                 window.officialName = data[0].name
-                console.log(data)
                 // send vars to getData
                 getData(latitude,longitude)
             });
@@ -48,7 +47,7 @@ var getData = function(latitude,longitude) {
         }
         // error with request
         else {
-            console.log("There was a problem with your request!");
+            alert("There was a problem with your request!");
         }
     });
 }
@@ -88,7 +87,6 @@ var forecast = function(data) {
 
     // create card for weather forecast and loop to next day
     var nDays = 1
-    console.log(data)
     for (var i = 0; i < 5; i++) {
         
         // gets the png id for the weather icons
