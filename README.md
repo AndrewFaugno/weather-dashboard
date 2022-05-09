@@ -14,7 +14,4 @@ User can input city name and recieve the current weather conditions and weather 
 https://andrewfaugno.github.io/weather-dashboard/
 
 ## Deployed Application
-
-
-
-
+<img width="1503" alt="Screen Shot 2022-05-08 at 8 08 41 PM" src="https://user-images.githubusercontent.com/93367297/167321521-5fc7a479-90cc-4034-8551-32934c4faeab.png">
